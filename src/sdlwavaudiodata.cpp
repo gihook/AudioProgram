@@ -1,12 +1,12 @@
 #include "sdlwavaudiodata.hpp"
 
-SdlWavAudioData::SdlWavAudioData(const std::string filePath, bool streamFromFile)
+SdlWavAudioData::SdlWavAudioData(const std::string& fileName, bool streamFromFile)
 {
 	SDL_AudioSpec spec;
 	Uint8* wavStart;
 	Uint32 wavLength;
 	
-	if (SDL_LoadWAV(fileName, &spec, &wavStart, &wavLength) == NULL)
+	if (SDL_LoadWAV(fileName.c_str(), &spec, &wavStart, &wavLength) == NULL)
 	{
 		throw fileName;
 	}
@@ -18,14 +18,14 @@ SdlWavAudioData::SdlWavAudioData(const std::string filePath, bool streamFromFile
 
 SdlWavAudioData::~SdlWavAudioData()
 {
-	SDL_FreeWAV(m_start;)
+	SDL_FreeWAV(m_start);
 }
 
 size_t SdlWavAudioData::GenerateSamples(float* stream, size_t streamLength, size_t pos, const SampleInfo& info)
 {
 	if (m_length == 0)
 	{
-		return 0;
+		return (size_t)-1;
 	}
 	
 	Uint32 length = (Uint32)streamLength;
@@ -40,6 +40,11 @@ size_t SdlWavAudioData::GenerateSamples(float* stream, size_t streamLength, size
 		stream[i] = (*samples) * factor;
 		samples++;
 	}
+	
+	m_pos = (Uint8*)samples;
+	m_length -= (length * 2);
+	
+	return length;
 }
 
 size_t SdlWavAudioData::GetAudioLength()
