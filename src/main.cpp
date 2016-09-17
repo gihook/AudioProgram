@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <vector>
 
 #include "iaudiodevice.hpp"
 #include "iaudiocontext.hpp"
@@ -7,6 +8,8 @@
 
 #include "sdlaudiodevice.hpp"
 #include "sdlaudiocontext.hpp"
+
+#include "configreader.hpp"
 
 
 int main()
@@ -16,7 +19,10 @@ int main()
 	IAudioDevice* device = new SdlAudioDevice();
 	IAudioContext* context = new SdlAudioContext();
 	
-	IAudioData* data = device->CreateAudioFromFile("./samples/fly_right.wav");
+	ConfigReader configReader("configuration.txt");
+	std::vector<FileInfo> fileInfos = configReader.GetFileInfos();
+	
+	IAudioData* data = device->CreateAudioFromFile(fileInfos[0].filePath);
 	
 	SampleInfo info;
 	info.volume = 1.0;

@@ -10,8 +10,8 @@ using namespace std;
 class StringUtil
 {
 public:
-	void split(const string &str, char delimiter, vector<string> &vector);
-	vector<string> split(const string &str, char delimiter);
+	void Split(const string &str, char delimiter, vector<string> &vector);
+	vector<string> Split(const string &str, char delimiter);
 };
 
 #endif
