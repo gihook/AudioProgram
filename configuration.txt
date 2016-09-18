@@ -1,1 +1,4 @@
 ./samples/testClip.wav test
+./samples/44.1K/Alesis-Fusion-Nylon-String-Guitar-C4.wav test  
+./samples/44.1K/Korg-TR-Rack-Pound-Bass-C2.wav test 
+./samples/imbecile.wav test2  

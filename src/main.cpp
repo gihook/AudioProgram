@@ -26,6 +26,7 @@ int main()
 	
 	SampleInfo info;
 	info.volume = 1.0;
+	info.pitch = 2.0;
 	
 	AudioObject sound(info, data);
 	
