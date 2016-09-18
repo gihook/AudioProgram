@@ -19,12 +19,20 @@ std::vector<FileInfo> ConfigReader::GetFileInfos()
 	{
 		while (getline((*file), line))
 		{
-			FileInfo fileInfo;
-			std::vector<std::string> results = stringUtil.Split(line, ' ');
-			fileInfo.filePath = results[0];
-			fileInfo.chordName = results[1];
+			if (line[0] != ' ')
+			{
+				FileInfo fileInfo;
+				std::vector<std::string> results = stringUtil.Split(line, ' ');
+				fileInfo.filePath = results[0];
+				fileInfo.chordName = results[1];
 			
-			fileInfos.push_back(fileInfo);
+				fileInfos.push_back(fileInfo);
+			}
+			else
+			{
+				// TODO: Treba dodati odgovarajuce Exceptione
+				throw "Error for line: " + line;
+			}
 		}
 		
 		file->close();

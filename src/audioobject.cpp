@@ -31,7 +31,7 @@ void AudioObject::SetPos(double pos)
 		pos = 1.0;
 	}
 	
-	PosToAbsolutePos(pos);
+	m_audioPos = PosToAbsolutePos(pos);
 }
 
 size_t AudioObject::PosToAbsolutePos(double pos)
